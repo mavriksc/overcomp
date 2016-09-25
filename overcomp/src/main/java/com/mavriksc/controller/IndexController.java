@@ -1,4 +1,4 @@
-package com.mavriksc;
+package com.mavriksc.controller;
 
 import java.time.LocalDateTime;
 
