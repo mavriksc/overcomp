@@ -9,6 +9,11 @@ import static org.bytedeco.javacpp.opencv_imgproc.*;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Rect;
 import org.bytedeco.javacpp.opencv_core.Scalar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.mavriksc.controller.IndexController;
+
 import org.bytedeco.javacpp.indexer.ByteIndexer;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
@@ -21,6 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import javax.imageio.ImageIO;
 
 public final class OpenCVUtils {
+	private static final Logger log = LoggerFactory.getLogger(OpenCVUtils.class);
 	private OpenCVUtils() {}
 	 /**
     * 8bit, 3-channel image.

@@ -13,10 +13,12 @@ import static org.bytedeco.javacpp.opencv_imgproc.matchTemplate;
 import static org.bytedeco.javacpp.opencv_imgproc.putText;
 import static org.bytedeco.javacpp.opencv_imgproc.resize;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.bytedeco.javacpp.indexer.FloatIndexer;
+import org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Point;
 import org.bytedeco.javacpp.opencv_core.Scalar;
@@ -25,7 +27,7 @@ import org.bytedeco.javacpp.opencv_core.Size;
 
 public class MatchingService {	
 	
-	private static final String TEMPLATES_FOLDER = "ow-templates/";
+	private static final String TEMPLATES_FOLDER = "static/ow-templates/";
 	private static final String IMG_PROC_PATH = "./img-proc/";
 	private static final Size defaultScreenshotSize = new Size(1920, 1080);
 	private static List<String> characters;	
@@ -50,7 +52,12 @@ public class MatchingService {
 				putText(scaledSrc, hero, point, FONT_HERSHEY_PLAIN, 2, color);
 			}
 		}
-		imwrite(IMG_PROC_PATH + guid,  source);		
+		String withExt = IMG_PROC_PATH + guid +".png";
+		imwrite(withExt,  scaledSrc);
+		File noExt = new File(IMG_PROC_PATH + guid);
+		File ext = new File(withExt);
+		noExt.delete();
+		ext.renameTo(noExt);				
 	}
 	
 	public static List<Point> getPointsFromMatAboveThreshold(Mat m, float t){
