@@ -8,6 +8,7 @@ import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.Rect;
+import org.bytedeco.javacpp.opencv_core.Scalar;
 import org.bytedeco.javacpp.indexer.ByteIndexer;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
@@ -15,6 +16,7 @@ import static org.bytedeco.javacpp.opencv_imgcodecs.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
 
@@ -115,6 +117,14 @@ public final class OpenCVUtils {
 	public static Mat getROI(Mat m,Rect r){		
 		return m.rowRange(r.y(),r.y()+r.height()).colRange(r.x(), r.x()+r.width());
 			
+	}
+	
+	public static Scalar randColor(){
+		int b,g,r;
+		b= ThreadLocalRandom.current().nextInt(0, 255 + 1);
+		g= ThreadLocalRandom.current().nextInt(0, 255 + 1);
+		r= ThreadLocalRandom.current().nextInt(0, 255 + 1);
+		return new Scalar (b,g,r,0);
 	}
 	
 
