@@ -5,7 +5,7 @@ Currently this is a Spring Boot and JavaCV application that will recognize chara
 ## Requirements ##
 java 1.8  
 libgomp (usually comes with git)  
-on debeian based systems `apt-get install libgomp1`  
+on debian based systems `apt-get install libgomp1`  
 cent/redhat: `yum install libgomp`  
 
 ## Running/ Packaging ##
@@ -16,7 +16,7 @@ Build runnable jar: `mvn package`
 in eclipse i have a maven build config with current workspace and goals = "package" right click pom and run as build config... to make jar  
 
 to run deployed
-`java -jar overcomp-x.x.x-SNAPSHOT.jar` to run
+`java -jar overcomp-x.x.x-SNAPSHOT.jar` 
 
 
 will "flash host" images from the img-proc folder. once viewed they are deleted. this is to prevent having to set up chron job or other persistence at this time. 
