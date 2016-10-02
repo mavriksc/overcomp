@@ -27,6 +27,7 @@ will "flash host" images from the img-proc folder. once viewed they are deleted.
 (daily) add dead characters template  
 (daily) complete counters matrix and implement reqs based on comp  
 (near) it may be usefull to make the results page use ajax to load changes so that the image isn't lost and the recomendations can be updated.  
+(near) build process. deploy to not snapshot. and not 8080   
 (far future)on the analysis page when the user corrects the results the image will be saved and learned from. once many many examples good and bad a haar cascade can be created for the characters and use real machine learning to pick these out.   
 
 
