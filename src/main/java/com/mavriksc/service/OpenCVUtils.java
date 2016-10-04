@@ -7,14 +7,18 @@ package com.mavriksc.service;
 import static org.bytedeco.javacpp.opencv_core.*;
 import static org.bytedeco.javacpp.opencv_imgproc.*;
 import org.bytedeco.javacpp.opencv_core.Mat;
+import org.bytedeco.javacpp.opencv_core.Point;
 import org.bytedeco.javacpp.opencv_core.Rect;
 import org.bytedeco.javacpp.opencv_core.Scalar;
+import org.bytedeco.javacpp.opencv_core.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mavriksc.controller.IndexController;
 
+import org.bytedeco.javacpp.DoublePointer;
 import org.bytedeco.javacpp.indexer.ByteIndexer;
+import org.bytedeco.javacpp.indexer.FloatIndexer;
 
 import static org.bytedeco.javacpp.opencv_imgcodecs.*;
 
@@ -23,6 +27,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.imageio.ImageIO;
@@ -159,6 +165,34 @@ public class OpenCVUtils {
 	public static Mat matFromJar(String path){
 		return matFromJar(path,CV_LOAD_IMAGE_UNCHANGED);
 	}
+	
+	public static List<Point> getPointsFromMatAboveThreshold(Mat m, float t){
+		List<Point> matches = new ArrayList<Point>();
+		FloatIndexer indexer = m.createIndexer();
+		for (int y = 0; y < m.rows(); y++) {
+        	for (int x = 0; x < m.cols(); x++) {
+        		if (indexer.get(y,x)>t) {
+					System.out.println("(" + x + "," + y +") = "+ indexer.get(y,x));
+					matches.add(new Point(x, y));					
+				}
+			}			
+		}		
+		return matches;
+	}	
+	
+	public static float matchScore(Mat src,Mat tmp){
+		
+		Size size = new Size(src.cols()-tmp.cols()+1, src.rows()-tmp.rows()+1);
+		Mat result = new Mat(size, CV_32FC1);
+		matchTemplate(src, tmp, result, TM_CCORR_NORMED);
+		DoublePointer minVal= new DoublePointer();
+		DoublePointer maxVal= new DoublePointer();
+		Point min = new Point();
+		Point max = new Point();
+		FloatIndexer fi = result.createIndexer();
+		minMaxLoc(result, minVal, maxVal, min, max, null);		
+		return fi.get(max.y(),max.x());
+	} 
 
 
 }

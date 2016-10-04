@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mavriksc.service.MatchingService;
+import com.mavriksc.types.Teams;
 
 @Controller
 public class IndexController {
@@ -52,7 +53,9 @@ public class IndexController {
     public String getAnalysis(@PathVariable String guid, Model model) {
         //do the analysis on the file and add items to the model 
 		
-		MatchingService.scaleAndCheckAll(guid);
+		//MatchingService.scaleAndCheckAll(guid);
+		Teams teams = MatchingService.sliceGetTeamsList(guid);
+		
 		model.addAttribute("imagePath", IMG_PROC_PATH + guid.toString());
         return "analysis";
     }
