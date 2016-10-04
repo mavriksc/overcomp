@@ -66,7 +66,7 @@ public class MatchingService {
 	
 	@SuppressWarnings("resource")
 	public static Teams sliceGetTeamsList(String guid){
-		Mat source = imread(IMG_PROC_PATH + guid);	
+		Mat source = imread(IMG_PROC_PATH + guid,CV_LOAD_IMAGE_COLOR);	
 		
 		Mat scaledSrc = new Mat(defaultScreenshotSize, source.type());
 		resize(source, scaledSrc, defaultScreenshotSize);
@@ -91,9 +91,9 @@ public class MatchingService {
 			theirs.x(x);
 			ours.x(x);
 			CharGuess guessTheirs,guessOurs;
-			teams.getTheirs().getCharacters().add(getGuesses(OpenCVUtils.getROI(sourceGrey, theirs)));
+			teams.getTheirs().getCharacters().add(getGuesses(OpenCVUtils.getROI(scaledSrc, theirs)));
 			guessTheirs = teams.getTheirs().getCharacters().get(i).getBestGuess();
-			teams.getOurs().getCharacters().add(getGuesses(OpenCVUtils.getROI(sourceGrey, ours)));
+			teams.getOurs().getCharacters().add(getGuesses(OpenCVUtils.getROI(scaledSrc, ours)));
 			guessOurs = teams.getOurs().getCharacters().get(i).getBestGuess();
 			log.info("their player" + i + " : " + guessTheirs.getCharacter() + 
 						" = " + guessTheirs.getScore().toString());
@@ -107,7 +107,7 @@ public class MatchingService {
 	private static CharacterGuesses getGuesses(Mat roi){
 		CharacterGuesses guesses = new CharacterGuesses();
 		for (String hero : getCharacters()) {
-			Mat template = OpenCVUtils.matFromJar(TEMPLATES_FOLDER + hero + ".png",0);
+			Mat template = OpenCVUtils.matFromJar(TEMPLATES_FOLDER + hero + ".png",CV_LOAD_IMAGE_COLOR);
 			CharGuess guess = new CharGuess();
 			guess.setCharacter(hero);
 			guess.setScore(OpenCVUtils.matchScore(roi, template));
