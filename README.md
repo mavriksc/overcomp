@@ -23,9 +23,9 @@ will "flash host" images from the img-proc folder. once viewed they are deleted.
 
 ## future goals:  ##
 (daily) finish the analysis template. add theming and thumbnailing  
-(daily) ~~use a max in roi technique instead of over the whole image to elim false pos and duplicate in same region~~  *done*
+(daily) ~~use a max in roi technique instead of over the whole image to elim false pos and duplicate in same region~~  *done*  
 (daily) add dead characters template  
-(daily) ~~complete counters matrix~~ and implement reqs based on comp  *done-ish*
+(daily) ~~complete counters matrix~~ and implement reqs based on comp  *done-ish*  
 (near) it may be usefull to make the results page use ajax to load changes so that the image isn't lost and the recomendations can be updated.  
 (near) build process. deploy to not snapshot. and not 8080   
 (far future)on the analysis page when the user corrects the results the image will be saved and learned from. once many many examples good and bad a haar cascade can be created for the characters and use real machine learning to pick these out.   
