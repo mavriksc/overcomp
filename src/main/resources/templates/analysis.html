@@ -1,13 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>ARGH!!!!</title>
+    <title>OverComp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" ></meta>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" media="screen" />
+    <link href="css/analysis.css" rel="stylesheet" />
   </head>
 <body>
-	
-		<img  th:src="${imagePath}" />
+<div class="container-fluid">
+	<form action="#" th:action="'analysis/' + ${guid}" method="post">	      
+	<div class="row">	
+		<div class="col-md-2">
+		<div class="row">
+		<h2 class="pull-right">Their Team</h2>
+		</div>
+			<div th:each="character : ${teams.theirs.characters}" >
+				<div class="row">
+					<span class="pull-right" th:text="'Player ' + ${characterStat.count}">Player X</span>
+				</div>
+				<div class="row">
+				<select class="pull-right" name="theirs">
+					<option th:each="cAndS : ${character.charAndMatchingStrength}" th:value="${cAndS.character}" th:text="${cAndS}" />
+				</select>				
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<img class="img-responsive" th:src="${imagePath}" />
+		</div>
+		<div class="col-md-2">
+		<div class="row">
+		<h2 >Your Team</h2>
+		</div>
+			<div th:each="character : ${teams.ours.characters}">
+				<div class="row">
+					<span th:text="'Player ' + ${characterStat.count}">Player X</span>
+				</div>
+				<div class="row">				
+				<select th:name="ours">
+					<option th:each="cAndS : ${character.charAndMatchingStrength}" th:value="${cAndS.character}" th:text="${cAndS}" />
+				</select>			
+				
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="row text-center">
+			<input type="submit" value="Submit" class="btn btn-primary center-block"/> 
+		</div>
+		</form>
+</div>	
+<script src="/webjars/jquery/jquery.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

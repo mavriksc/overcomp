@@ -123,7 +123,7 @@ public class MatchingService {
 			return characters;
 		} else{
 			characters = new ArrayList<String>();
-			characters.addAll(java.util.Arrays.asList("genji,mccree,pharah,reaper,soldier,tracer,widowmaker,torbjorn,mei,junkrat,hanzo,bastion,dva,reinhardt,roadhog,winston,zarya,zenyatta,symmetra,mercy,lucio,ana".split(",")));
+			characters.addAll(java.util.Arrays.asList("ana,bastion,dva,genji,hanzo,junkrat,lucio,mccree,mei,mercy,pharah,reaper,reinhardt,roadhog,soldier,symmetra,torbjorn,tracer,widowmaker,winston,zarya,zenyatta".split(",")));
 			return characters;
 		}
 	}

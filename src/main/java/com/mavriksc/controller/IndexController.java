@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mavriksc.service.MatchingService;
 import com.mavriksc.types.Teams;
+import com.mavriksc.types.TeamsConfirmed;
 
 @Controller
 public class IndexController {
@@ -55,7 +57,8 @@ public class IndexController {
 		
 		//MatchingService.scaleAndCheckAll(guid);
 		Teams teams = MatchingService.sliceGetTeamsList(guid);
-		
+		model.addAttribute("guid", guid);
+		model.addAttribute("teams", teams);
 		model.addAttribute("imagePath", IMG_PROC_PATH + guid.toString());
         return "analysis";
     }
@@ -81,16 +84,10 @@ public class IndexController {
 		}	
 	}
 	
-	
-	@RequestMapping("/temp/o")
-    String other(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
-        return "other";
-    }
-	
-	@RequestMapping("/temp/c")
-    String cover(Model model) {
-        model.addAttribute("now", LocalDateTime.now());
-        return "cover";
-    }
+	@PostMapping("analysis/{guid}")
+	public String confirmation(@ModelAttribute TeamsConfirmed teams,@PathVariable String guid){
+		log.info(teams.getOurs().toString());
+		
+		return "redirect:/analysis/"+guid.toString();
+	}
 }

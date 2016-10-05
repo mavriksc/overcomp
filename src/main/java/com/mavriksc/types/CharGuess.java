@@ -30,6 +30,13 @@ public class CharGuess implements Comparable<CharGuess> {
 	public int compareTo(CharGuess o) {
 		return o.getScore().compareTo(this.getScore());
 	}
+
+	@Override
+	public String toString() {
+		
+		return String.format(this.getCharacter() + " : %.3f", this.getScore()) ;
+	}
+	
 	
 	
 	
