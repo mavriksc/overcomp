@@ -118,7 +118,7 @@ public class MatchingService {
 	
 	
 	
-	private static List<String> getCharacters(){
+	public static List<String> getCharacters(){
 		if (characters != null) {
 			return characters;
 		} else{

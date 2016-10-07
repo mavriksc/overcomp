@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mavriksc.service.AnalysisService;
 import com.mavriksc.service.MatchingService;
 import com.mavriksc.types.Teams;
 import com.mavriksc.types.TeamsConfirmed;
@@ -34,6 +35,7 @@ public class IndexController {
 	
 	private static final Logger log = LoggerFactory.getLogger(IndexController.class);
 	private static final String IMG_PROC_PATH = "./img-proc/";
+	private static AnalysisService aService = new AnalysisService();
 	
 	@GetMapping("/")
     public String getIndex(Model model) {
@@ -57,6 +59,8 @@ public class IndexController {
 		
 		//MatchingService.scaleAndCheckAll(guid);
 		Teams teams = MatchingService.sliceGetTeamsList(guid);
+		TeamsConfirmed teamsConf = new TeamsConfirmed(teams);
+		aService.yourSwitch(teamsConf);
 		model.addAttribute("guid", guid);
 		model.addAttribute("teams", teams);
 		model.addAttribute("imagePath", IMG_PROC_PATH + guid.toString());
