@@ -5,8 +5,9 @@ import static org.bytedeco.javacpp.opencv_core.CV_32FC1;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -30,6 +31,17 @@ public class AnalysisService {
 		super();
 		init();
 		characters = MatchingService.getCharacters();
+	}
+	
+	public Map<String, Float> rankedList(TeamsConfirmed teams){
+		List<ValPos> rl = findRankedList( crossSum(teams));
+		Map<String, Float> rlStrings = new LinkedHashMap<String, Float>();
+		for (ValPos valPos : rl) {
+			rlStrings.put(characters.get(valPos.getPos()), valPos.getVal());
+			
+		}
+		
+		return rlStrings;
 	}
 	
 	public String yourSwitch(TeamsConfirmed teams){
@@ -89,6 +101,18 @@ public class AnalysisService {
 		
 		return topS;
 	}
+	
+	private List<ValPos> findRankedList(List<Float> f){
+		List<ValPos> list = new ArrayList<>();
+		for (int i = 0; i < f.size(); i++) {
+			list.add(new ValPos(f.get(i), i));
+		}
+		list.sort(null);
+		
+		
+		return list;
+	}
+	
 	
 	
 

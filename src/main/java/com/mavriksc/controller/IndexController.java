@@ -60,7 +60,7 @@ public class IndexController {
 		//MatchingService.scaleAndCheckAll(guid);
 		Teams teams = MatchingService.sliceGetTeamsList(guid);
 		TeamsConfirmed teamsConf = new TeamsConfirmed(teams);
-		aService.yourSwitch(teamsConf);
+		model.addAttribute("rankedList", aService.rankedList(teamsConf));
 		model.addAttribute("guid", guid);
 		model.addAttribute("teams", teams);
 		model.addAttribute("imagePath", IMG_PROC_PATH + guid.toString());

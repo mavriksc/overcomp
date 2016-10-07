@@ -53,6 +53,23 @@
 		</form>
 <!-- 	put analysis here -->
 <div class="row">
+<!-- Testing -->
+<table class ="results-ctr">
+	<tr>
+	    <th><h2>Character</h2></th>
+	    <th><h2>Strength</h2></th> 
+	</tr>
+	<tr th:each="kv : ${rankedList}">
+	    <td><h3 th:text="${kv.key}">keyvalue</h3></td>
+	    <td><h3 th:text="${kv.value}">num</h3></td>
+	</tr>
+</table>
+
+
+</div>
+
+
+<div class="row">
 <!-- your best switch -->
 </div>
 <div class="row">
