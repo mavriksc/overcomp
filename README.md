@@ -1,6 +1,7 @@
 # overcomp #
 
 Currently this is a Spring Boot and JavaCV application that will recognize characters in Overwatch and return marked up image with what it thinks are the characters. This is incomplete but close. I need to add templates for dead characters and maybe some more preprocessing to fix false positives but is already surprisingly good. should be fixed within days. 
+#### UI updates in recent patch causes bad results need to update templates.
 
 ## Requirements ##
 java 1.8  
