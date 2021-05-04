@@ -14,7 +14,6 @@ import org.bytedeco.javacpp.opencv_core.Size;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mavriksc.controller.IndexController;
 
 import org.bytedeco.javacpp.DoublePointer;
 import org.bytedeco.javacpp.indexer.ByteIndexer;
